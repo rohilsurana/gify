@@ -7,5 +7,6 @@
         <file>closehover.png</file>
         <file>zoominhover.png</file>
         <file>zoomouthover.png</file>
+        <file>icon.png</file>
     </qresource>
 </RCC>

@@ -11,16 +11,18 @@ MainWindow::MainWindow(QWidget *parent,QString s) :
     ui->setupUi(this);
     setAttribute(Qt::WA_TranslucentBackground);
     setWindowFlags(Qt::FramelessWindowHint);
-    setWindowState((windowState() & ~(Qt::WindowMinimized | Qt::WindowFullScreen))
-                       | Qt::WindowMaximized);
+    setWindowState((windowState()) | Qt::WindowMaximized);
 
 
     file = new QString(s);
     createMovie();
     size = new QSize;
+    qDebug()<<ui->label->sizeHint();
     *size = ui->label->sizeHint();
     setupButtons();
-    
+    qDebug()<<this->sizeHint();
+
+
     
 }
 
@@ -116,8 +118,11 @@ void MainWindow::zoomouthoverleave()
 
 void MainWindow::zoomin()
 {
+    if(scaleFactor<2.25)
     scaleFactor += .05;
     movie->setScaledSize(scaleFactor * (*size));
+    setWindowState((windowState() & ~(Qt::WindowMinimized | Qt::WindowFullScreen))
+                       | Qt::WindowMaximized);
 
 
 
@@ -125,8 +130,11 @@ void MainWindow::zoomin()
 
 void MainWindow::zoomout()
 {
+    if(scaleFactor>0.05)
     scaleFactor -= .05;
     movie->setScaledSize(scaleFactor * (*size));
+    setWindowState((windowState() & ~(Qt::WindowMinimized | Qt::WindowFullScreen))
+                       | Qt::WindowMaximized);
 
 }
 
