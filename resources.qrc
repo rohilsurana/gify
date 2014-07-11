@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>1.gif</file>
+        <file>close.png</file>
+        <file>zoomin.png</file>
+        <file>zoomout.png</file>
+        <file>closehover.png</file>
+        <file>zoominhover.png</file>
+        <file>zoomouthover.png</file>
+    </qresource>
+</RCC>
