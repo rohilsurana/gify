@@ -17,6 +17,8 @@ public:
     ~MainWindow();
     QMovie *movie;
     QString *file;
+    QSize *size;
+    double scaleFactor;
 
 private:
     Ui::MainWindow *ui;

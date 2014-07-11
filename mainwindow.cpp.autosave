@@ -18,6 +18,8 @@ MainWindow::MainWindow(QWidget *parent,QString s) :
     size = new QSize;
     *size = ui->label->sizeHint();
     setupButtons();
+    
+    
 }
 
 MainWindow::~MainWindow()
