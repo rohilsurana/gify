@@ -33,6 +33,8 @@ private slots:
     void zoomout();
     void zoomouthover();
     void zoomouthoverleave();
+protected:
+    virtual void wheelEvent(QWheelEvent *event);
 };
 
 #endif // MAINWINDOW_H

@@ -13,11 +13,15 @@ MainWindow::MainWindow(QWidget *parent,QString s) :
     setWindowFlags(Qt::FramelessWindowHint);
     setWindowState((windowState() & ~(Qt::WindowMinimized | Qt::WindowFullScreen))
                        | Qt::WindowMaximized);
+
+
     file = new QString(s);
     createMovie();
     size = new QSize;
     *size = ui->label->sizeHint();
     setupButtons();
+    
+    
 }
 
 MainWindow::~MainWindow()
@@ -124,4 +128,13 @@ void MainWindow::zoomout()
     scaleFactor -= .05;
     movie->setScaledSize(scaleFactor * (*size));
 
+}
+
+void MainWindow::wheelEvent(QWheelEvent *event)
+{
+    qDebug()<<QWheelEvent::Wheel;
+    if(event->delta()>0)
+        zoomin();
+    if(event->delta()<0)
+        zoomout();
 }
