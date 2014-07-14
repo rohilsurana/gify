@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include <QMovie>
 #include <QDebug>
+#include <QScreen>
 
 MainWindow::MainWindow(QWidget *parent,QString s) :
     QMainWindow(parent),
@@ -11,7 +12,6 @@ MainWindow::MainWindow(QWidget *parent,QString s) :
     ui->setupUi(this);
     setAttribute(Qt::WA_TranslucentBackground);
     setWindowFlags(Qt::FramelessWindowHint);
-    setWindowState((windowState()) | Qt::WindowMaximized);
 
 
     file = new QString(s);
@@ -51,6 +51,8 @@ void MainWindow::createMovie()
         movie->stop();
         movie->start();
     }
+    //QScreen *w = new QScreen();
+    //qDebug()<<w.availableSize();
 }
 
 void MainWindow::setupButtons()
@@ -118,7 +120,7 @@ void MainWindow::zoomouthoverleave()
 
 void MainWindow::zoomin()
 {
-    if(scaleFactor<2.25)
+    //if(scaleFactor<2.25)
     scaleFactor += .05;
     movie->setScaledSize(scaleFactor * (*size));
     setWindowState((windowState() & ~(Qt::WindowMinimized | Qt::WindowFullScreen))
