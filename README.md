@@ -1,1 +1,1 @@
-A GIF viewer that shows animations
+A GIF viewer that is capable of showing animations in GIFs.

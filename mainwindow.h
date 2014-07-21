@@ -5,6 +5,7 @@
 #include <QFile>
 //#include <QtSvg>
 #include <QFileDialog>
+#include <QDrag>
 namespace Ui {
 class MainWindow;
 }
@@ -16,6 +17,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0,QString s = ":/1.gif");
     ~MainWindow();
+    int x = 0;
     QMovie *movie;
     QString *file;
     QSize *size;
@@ -34,7 +36,13 @@ private slots:
     void zoomout();
     void zoomouthover();
     void zoomouthoverleave();
+    void moviehover();
+    void movieleave();
+    void moviemove();
+    void setPosition();
 protected:
+
+    void mousePressEvent(QMouseEvent *event);
     virtual void wheelEvent(QWheelEvent *event);
 };
 

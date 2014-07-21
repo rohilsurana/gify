@@ -1,4 +1,6 @@
 #include "mylabel.h"
+#include <QMimeData>
+#include <QMimeType>
 
 MyLabel::MyLabel(QWidget *parent) :
     QLabel(parent)
@@ -20,4 +22,6 @@ bool MyLabel::event(QEvent *e)
         emit hoverenter();
     if(e->type() == QMouseEvent::Leave)
         emit hoverleave();
+    if(e->type() == QMouseEvent::DragMove||e->type() == QMouseEvent::DragEnter||e->type() == QMouseEvent::DragLeave)
+        emit dragged();
 }

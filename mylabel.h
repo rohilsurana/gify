@@ -4,6 +4,7 @@
 #include <QLabel>
 #include <QMouseEvent>
 #include <QDebug>
+#include <QDrag>
 
 class MyLabel : public QLabel
 {
@@ -15,13 +16,13 @@ signals:
     void clicked();
     void hoverenter();
     void hoverleave();
+    void dragged();
 
 public slots:
 
 protected:
     void mousePressEvent(QMouseEvent *e);
     virtual bool event(QEvent *e);
-
 
 };
 
