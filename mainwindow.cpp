@@ -9,6 +9,7 @@
 #include <QMimeType>
 
 
+
 MainWindow::MainWindow(QWidget *parent,QString s) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -89,6 +90,12 @@ void MainWindow::setupButtons()
 
     connect(ui->label,SIGNAL(hoverleave()),this,SLOT(movieleave()));
 
+    connect(ui->pauseButton,SIGNAL(clicked()),this,SLOT(pauseButton()));
+
+    connect(ui->pauseButton,SIGNAL(hoverenter()),this,SLOT(pauseButtonhover()));
+
+    connect(ui->pauseButton,SIGNAL(hoverleave()),this,SLOT(pauseButtonhoverleave()));
+
 
 
 }
@@ -140,6 +147,38 @@ void MainWindow::moviehover()
 void MainWindow::movieleave()
 {
     this->setCursor(Qt::ArrowCursor);
+}
+
+void MainWindow::pauseButton()
+{
+    if(pausesClicked)
+    {
+        movie->setPaused(true);
+        pausesClicked = false;
+        ui->pauseButton->setPixmap(QPixmap(":/play.png"));
+    }
+    else
+    {
+        movie->setPaused(false);
+        pausesClicked = true;
+        ui->pauseButton->setPixmap(QPixmap(":/pauseButton.png"));
+    }
+}
+
+void MainWindow::pauseButtonhover()
+{
+    if(pausesClicked)
+        ui->pauseButton->setPixmap(QPixmap(":/pauseButtonhover.png"));
+    else
+        ui->pauseButton->setPixmap(QPixmap(":/playhover.png"));
+}
+
+void MainWindow::pauseButtonhoverleave()
+{
+    if(pausesClicked)
+        ui->pauseButton->setPixmap(QPixmap(":/pauseButton.png"));
+    else
+        ui->pauseButton->setPixmap(QPixmap(":/play.png"));
 }
 
 void MainWindow::moviemove()
@@ -195,13 +234,17 @@ void MainWindow::setPosition()
     QSize close= screen - ui->close->sizeHint();
     QSize labelPos= screen - ui->label->sizeHint();
 
+
+
     zoomin = zoomin / 2;
     zoomout = zoomout / 2;
     close = close;
     labelPos = labelPos / 2;
 
-    ui->zoomin->move(zoomin.width()-ui->zoomin->sizeHint().width(),screen.height()-ui->zoomin->sizeHint().height());
-    ui->zoomout->move(zoomout.width()+ui->zoomin->sizeHint().width(),screen.height()-ui->zoomout->sizeHint().height());
+    ui->zoomin->move(zoomin.width()-ui->zoomin->sizeHint().width() - 10,screen.height()-ui->zoomin->sizeHint().height() - 5);
+    ui->zoomout->move(zoomout.width()+ui->zoomout->sizeHint().width() + 10,screen.height()-ui->zoomout->sizeHint().height() - 5);
+    ui->pauseButton->move(zoomin.width()-ui->pauseButton->sizeHint().width() + 30,screen.height()-ui->pauseButton->sizeHint().height() - 5);
+
     ui->close->move(close.width()+10,0);
     ui->label->move(labelPos.width(),labelPos.height());
 
@@ -220,7 +263,7 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
     if(child->pixmap())
         return;
         qDebug()<<"Rohil dfef";
-
+    child->movie()->setPaused(true);
     QPixmap pixmap = child->movie()->currentPixmap();
 
 
@@ -251,11 +294,13 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
     if (drag->exec(Qt::CopyAction | Qt::MoveAction, Qt::CopyAction) == Qt::MoveAction) {
         child->close();
     } else {
-        child->show();
+        //child->show();
         x=1;
         child->move(this->cursor().pos() + child->pos() - event->pos());
-        qDebug()<<this->cursor().pos()<<"MOUSE"<< this->cursor().pos() - event->pos();
-        child->setMovie(child->movie());
+        //qDebug()<<this->cursor().pos()<<"MOUSE"<< this->cursor().pos() - event->pos();
+        //child->setMovie(child->movie());
+        if(pausesClicked)
+        child->movie()->setPaused(false);
     }
 
 }

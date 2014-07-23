@@ -21,6 +21,7 @@ public:
     QMovie *movie;
     QString *file;
     QSize *size;
+    bool pausesClicked = true;
     double scaleFactor;
 
 private:
@@ -36,6 +37,9 @@ private slots:
     void zoomout();
     void zoomouthover();
     void zoomouthoverleave();
+    void pauseButton();
+    void pauseButtonhover();
+    void pauseButtonhoverleave();
     void moviehover();
     void movieleave();
     void moviemove();

@@ -8,5 +8,9 @@
         <file>zoominhover.png</file>
         <file>zoomouthover.png</file>
         <file>icon.png</file>
+        <file>pauseButton.png</file>
+        <file>pauseButtonhover.png</file>
+        <file>play.png</file>
+        <file>playhover.png</file>
     </qresource>
 </RCC>
